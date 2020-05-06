@@ -3,7 +3,7 @@
     <div id="nav">
       HOLA KEVIN PAGINA PRINCIPAL
       <!-- Declarar etiqueta creada -->
-    <Navigation></Navigation>
+    <Navigation />
     </div>
     <router-view/>
   </div>
@@ -22,3 +22,10 @@ export default {
   }
 }
 </script>
+
+
+<!--importar estilos  -->
+<style lang="scss">
+  
+    @import './scss/App.scss';
+</style>
