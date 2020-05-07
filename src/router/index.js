@@ -7,6 +7,7 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [{
