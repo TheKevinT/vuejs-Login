@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-50" >
         <div class="columns">
             <div class="column is-6 is-offset-3">
 
@@ -31,6 +31,16 @@
                 <button type="submit" class="button is-primary">Registrarme</button>
                 </form>
 
+
+<!-- ALERTA-->
+                <div class="notification is-danger mt-10" v-if="error">
+               {{ error }}
+                </div>
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -43,14 +53,19 @@ export default {
         return {
             name: '',
             email: '',
-            password:''
+            password:'',
+            error: ''
         }
     },
     name:'Register',
     methods: {
         //para que no se envie el formulario al dar clic vacio
         register(){
-         
+            if(this.name && this.email && this.password){
+        //enviamos formulario
+            }else{
+                this.error = 'Todos los campos son requeridos'
+            }
         }
     }
 }
