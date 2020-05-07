@@ -72,11 +72,23 @@ export default {
             if(this.name && this.email && this.password){
                 //enviamos formulario
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-                .then(user =>{
-                    this.name = ''
-                    this.email = ''
-                    this.password = ''
-                    console.log(user)
+                .then(user => {
+                    //actualizar el usuario
+                    if(user) {
+                        user.user.updateProfile({
+                            displayName: this.name
+                        }).then(() =>{
+
+                            this.name = ''
+                            this.email = ''
+                            this.password = ''
+                           // console.log(user)
+                            this.$router.push({name: 'dashboard'})
+                           
+                        }).catch((err)=>{
+                            this.error = err.message
+                        })
+                    }
 
                 }).catch(err=>{
                     this.error = err.message

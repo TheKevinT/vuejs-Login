@@ -23,14 +23,43 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <router-Link class="button is-primary" to='/register'>
-            <strong>Registrarme</strong>
-          </router-Link>
-          <router-Link class="button is-light" to='/login'>
-            Iniciar Sesión
-          </router-Link>
+
+
+
+    <template v-if="user">
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+            {{ user.email }}
+            </a>
+
+            <div class="navbar-dropdown">
+            <router-link class="navbar-item" to="/dashboard">
+                Dashboard
+            </router-link >
+            <a class="navbar-item" @click.prevent="logout">
+                Cerrar Sesión
+            </a>
+
+            </div>
         </div>
+    </template>
+
+        <template v-else>
+
+        <div class="buttons">
+                <router-Link class="button is-primary" to='/register'>
+                    <strong>Registrarme</strong>
+                </router-Link>
+                <router-Link class="button is-light" to='/login'>
+                    Iniciar Sesión
+                </router-Link>
+                </div>
+        
+        </template>
+
+
+
+       
       </div>
     </div>
   </div>
@@ -38,13 +67,18 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
+
+
 //menu de navegacion responsive
 export default {
     //crear propiedades, retornar objetos
     data() {
         return {
 
-            isOpen:false
+            isOpen:false,
+            user:null
         }
     },
     methods: {
@@ -53,7 +87,28 @@ export default {
             const status = !this.isOpen
             this.isOpen = status
 
+        },
+    //cerrar sesion
+        logout(){
+            firebase.auth().signOut().then(()=>{
+                this.$router.push({name: 'login'})
+            })
+        },
+
+       
+        
+    },
+
+    //ciclo de vida del componente --> cuando se crea el componente
+     //recuperar el usuario que inicio sesion
+    created(){
+            firebase.auth().onAuthStateChanged(user =>{
+                if(user){
+                    this.user = user
+                }else{
+                    this.user = null
+                }
+            } )
         }
-    }
 }
 </script>
