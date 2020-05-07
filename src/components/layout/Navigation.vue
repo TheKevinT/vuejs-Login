@@ -5,14 +5,14 @@
       <h3 class="title is-3">LOGO</h3>
     </router-link>
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" class="navbar-burger burger" :class="{'is-active' : isOpen}" @click.prevent="toggleMenu" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active' : isOpen}">
     <div class="navbar-start">
       <router-link class="navbar-item" to='/'>
         Home
@@ -38,7 +38,22 @@
 </template>
 
 <script>
+//menu de navegacion responsive
 export default {
-    
+    //crear propiedades, retornar objetos
+    data() {
+        return {
+
+            isOpen:false
+        }
+    },
+    methods: {
+        //para abrir y cerrar
+        toggleMenu(){
+            const status = !this.isOpen
+            this.isOpen = status
+
+        }
+    }
 }
 </script>
