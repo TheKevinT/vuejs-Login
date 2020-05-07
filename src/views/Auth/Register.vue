@@ -47,6 +47,11 @@
 </template>
 
 <script>
+
+//importar firebase
+import '@/firebase/init'
+import firebase from 'firebase'
+
 export default {
     //capturar valores de los campor
     data() {
@@ -61,8 +66,22 @@ export default {
     methods: {
         //para que no se envie el formulario al dar clic vacio
         register(){
+
+            this.error =''
+
             if(this.name && this.email && this.password){
-        //enviamos formulario
+                //enviamos formulario
+                firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+                .then(user =>{
+                    this.name = ''
+                    this.email = ''
+                    this.password = ''
+                    console.log(user)
+
+                }).catch(err=>{
+                    this.error = err.message
+                })
+            
             }else{
                 this.error = 'Todos los campos son requeridos'
             }
