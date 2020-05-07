@@ -5,7 +5,7 @@
 
                 <h3 class="title is-3">CREAR UNA CUENTA</h3><hr>
             
-                <form action="#">
+                <form action="#" @submit.prevent="register">
                 
                     <div class="field">
                         <label class="label">Name</label>
@@ -39,6 +39,12 @@
 
 <script>
 export default {
-    name:'Register'
+    name:'Register',
+    methods: {
+        //para que no se envie el formulario al dar clic vacio
+        register(){
+         
+        }
+    },
 }
 </script>
