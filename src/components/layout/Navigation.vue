@@ -24,12 +24,12 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
+          <router-Link class="button is-primary" to='/register'>
+            <strong>Registrarme</strong>
+          </router-Link>
+          <router-Link class="button is-light" to='/login'>
+            Iniciar Sesión
+          </router-Link>
         </div>
       </div>
     </div>
